@@ -67,7 +67,7 @@ public class CarController {
 		return ResponseEntity.ok(this.service.getAllCars()); // This will return the full list of cars
 	}
 
-	@GetMapping("get/{id}") // get because we are reading information // 200
+	@GetMapping("getById/{id}") // get because we are reading information // 200
 	// 200 - don't need to change these as the default is 200 anyway
 	public Car getCar(@PathVariable Integer id) { // @pathvariable is telling spring
 //		that the id is being pulled from above
