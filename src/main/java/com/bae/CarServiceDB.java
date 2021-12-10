@@ -74,4 +74,10 @@ public class CarServiceDB implements CarService {
 		return found;
 	}
 
+	@Override
+	public List<Car> getAllCarsByPrice(Number price) {
+		List<Car> found = this.repo.findByPriceIgnoreCase(price);
+		return null;
+	}
+
 }

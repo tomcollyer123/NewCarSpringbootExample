@@ -16,6 +16,8 @@ public interface CarService {
 
 	List<Car> getAllCarsByColour(String colour);
 
+	List<Car> getAllCarsByPrice(Number price);
+
 	Car getCar(Integer id);
 
 	Car replaceCar(Integer id, Car newCar);

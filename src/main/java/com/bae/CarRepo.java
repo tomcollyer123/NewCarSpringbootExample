@@ -18,4 +18,6 @@ public interface CarRepo extends JpaRepository<Car, Integer> {
 
 	List<Car> findByColourIgnoreCase(String colour);
 
+	List<Car> findByPriceIgnoreCase(Number price);
+
 }

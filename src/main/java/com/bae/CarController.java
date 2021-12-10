@@ -61,6 +61,12 @@ public class CarController {
 		return ResponseEntity.ok(found);
 	}
 
+	@GetMapping("/getByPrice/{price}")
+	public ResponseEntity<List<Car>> getCarByPrice(@PathVariable Number price) {
+		List<Car> found = this.service.getAllCarsByPrice(price);
+		return ResponseEntity.ok(found);
+	}
+
 	@GetMapping("/getAll") // get because we are READING something // 200
 	// 200 - don't need to change these as the default is 200 anyway
 	public ResponseEntity<List<Car>> getAllCars() {

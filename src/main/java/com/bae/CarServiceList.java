@@ -55,4 +55,10 @@ public class CarServiceList implements CarService {
 		return null;
 	}
 
+	@Override
+	public List<Car> getAllCarsByPrice(Number price) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

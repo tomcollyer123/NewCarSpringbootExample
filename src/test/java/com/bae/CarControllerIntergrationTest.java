@@ -1,5 +1,6 @@
 package com.bae;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -82,8 +83,9 @@ public class CarControllerIntergrationTest {
 
 	@Test
 	void testGetAll() throws Exception {
-		List<Car> testCars = List.of(new Car("red", 1, "Ferrari", "La Ferrari", 2, 1600000)
-		("blue", 2,"Land Rover","RangeRover sport",5,75000)("yellow", 3,"porsche","GT3 RS",2,130000));
+		List<Car> testCars = List.of(new Car("red", 1, "Ferrari", "La Ferrari", 2, 1600000),
+				new Car("blue", 2, "Land Rover", "RangeRover sport", 5, 75000),
+				new Car("yellow", 3, "porsche", "GT3 RS", 2, 130000));
 		String json = this.mapper.writeValueAsString(testCars);
 
 		RequestBuilder req = get("/getAll");
@@ -130,6 +132,18 @@ public class CarControllerIntergrationTest {
 	}
 
 	@Test
+	void testGetByPrice() throws Exception {
+		List<Car> testCars = List.of(new Car("red", 1, "Ferrari", "La Ferrari", 2, 1600000));
+		String json = this.mapper.writeValueAsString(testCars);
+
+		RequestBuilder req = get("/getByPrice/1600000");
+		ResultMatcher checkStatus = status().isOk();
+		ResultMatcher checkBody = content().json(json);
+
+		this.mvc.perform(req).andExpect(checkStatus).andExpect(checkBody);
+	}
+
+	@Test
 	void testGetById() throws Exception {
 		Car testCar = new Car("red", 1, "Ferrari", "La Ferrari", 2, 1600000);
 		String json = this.mapper.writeValueAsString(testCar);
@@ -141,8 +155,11 @@ public class CarControllerIntergrationTest {
 		this.mvc.perform(req).andExpect(checkStatus).andExpect(checkBody);
 	}
 
-//	@Test
-//	void testDelete() throws Exception {
-//
-//	}
+	@Test
+	void testRemove() throws Exception {
+		RequestBuilder req = delete("/remove/1");
+		ResultMatcher checkStatus = status().isNoContent();
+
+		this.mvc.perform(req).andExpect(checkStatus);
+	}
 }
